@@ -1,122 +1,29 @@
-# 🛍️ Customer Segmentation with Clustering
+# Customer Segmentation with Clustering
 
-An unsupervised machine learning project that segments mall customers into meaningful groups based on income and spending behavior using K-Means, Agglomerative, and DBSCAN clustering.
+An unsupervised learning notebook that explores customer groups in the supplied mall-customer dataset using K-Means, Agglomerative Clustering, and DBSCAN.
 
----
+## Project files
 
-## 📋 Overview
-
-This project applies clustering techniques to identify distinct customer segments from a mall dataset. The goal is to uncover natural groupings — such as "Premium", "Budget", or "Value Seekers" — that can inform targeted marketing strategies and business decisions.
-
----
-
-## 📂 Project Structure
-
-```
-├── Customer_Segmentation_with_Clustering.ipynb   # Main notebook
-├── Mall_Customers.csv                            # Dataset (200 customers)
-├── mall_customers_clustered.csv                  # Output: data with cluster labels
-├── kmeans_centers.csv                            # Output: cluster centers
-├── cluster_profile.csv                           # Output: per-cluster stats
-├── segment_summary.csv                           # Output: stakeholder summary
-├── method_comparison.csv                         # Output: algorithm comparison
-├── kmeans_clusters.png                           # Figure: K-Means scatter plot
-├── agg_clusters.png                              # Figure: Agglomerative scatter plot
-├── dbscan_clusters.png                           # Figure: DBSCAN scatter plot
-├── pca_kmeans.png                                # Figure: PCA projection
+```text
+.
+├── Customer_Segmentation_with_Clustering (1).ipynb
+├── Mall_Customers.csv
 └── README.md
 ```
 
----
+The notebook uses the annual income and spending-score features for clustering and also explores demographic distributions. It scales data for the clustering methods, considers K-Means cluster counts using inertia and silhouette scores, profiles the resulting groups, compares algorithms, uses PCA for a two-dimensional view, and exports analysis outputs when run.
 
-## 📊 Dataset
+## Requirements and usage
 
-**Source:** [Mall Customers — Kaggle](https://www.kaggle.com/)
-
-| Property | Value |
-|---|---|
-| Records | 200 customers |
-| Target variable | None (unsupervised) |
-| Features used | `Annual Income (k$)`, `Spending Score (1-100)` |
-
-**All columns:**
-`CustomerID`, `Gender`, `Age`, `Annual Income (k$)`, `Spending Score (1-100)`
-
----
-
-## 🔧 Workflow
-
-1. **Data Loading & Cleaning** — rename columns, strip whitespace, check for nulls
-2. **EDA** — distribution plots for income, spending, and age; income vs. spending scatter by gender
-3. **Feature Scaling** — StandardScaler for K-Means/Agglomerative; MinMaxScaler for DBSCAN
-4. **Optimal k Selection** — Elbow method (inertia) + Silhouette score across k = 2–10
-5. **K-Means Clustering** — fit with best k, visualize with cluster centers
-6. **Cluster Profiling** — mean/median/min/max per cluster; semantic segment labels
-7. **Alternative Algorithms** — Agglomerative (Ward linkage) and DBSCAN (k-distance plot for eps)
-8. **Method Comparison** — silhouette scores across all three algorithms
-9. **PCA Projection** — 2D visualization of clusters via PCA
-10. **Export** — clustered CSV, centers, profiles, and figures saved to disk
-
----
-
-## 🏷️ Customer Segments
-
-Clusters are automatically labeled based on median income and spending thresholds:
-
-| Segment | Description |
-|---|---|
-| **Premium** | High income, high spending |
-| **Cautious** | High income, low spending |
-| **Value Seekers** | Low income, high spending |
-| **Budget** | Low income, low spending |
-
----
-
-## 📈 Models & Evaluation
-
-| Algorithm | Notes |
-|---|---|
-| K-Means | Optimal k via elbow + silhouette |
-| Agglomerative (Ward) | Hierarchical, compared via silhouette |
-| DBSCAN | Density-based; handles noise points (label = -1) |
-
-All three are compared using the **Silhouette Score** at the end of the notebook.
-
----
-
-## 🛠️ Tech Stack
-
-- **Python 3**
-- **Pandas** — data loading and manipulation
-- **NumPy** — numerical operations
-- **Matplotlib / Seaborn** — visualizations
-- **Scikit-learn** — clustering, scaling, PCA, and evaluation metrics
-
----
-
-## 🚀 Getting Started
+Python and Jupyter are required. The notebook imports pandas, NumPy, Matplotlib, Seaborn, and scikit-learn.
 
 ```bash
-# 1. Clone the repo
-git clone https://github.com/your-username/customer-segmentation.git
-cd customer-segmentation
-
-# 2. Install dependencies
-pip install pandas numpy matplotlib seaborn scikit-learn
-
-# 3. Launch the notebook
-jupyter notebook Customer_Segmentation_with_Clustering.ipynb
+pip install pandas numpy matplotlib seaborn scikit-learn jupyter
+jupyter notebook
 ```
 
-Make sure `Mall_Customers.csv` is in the same directory as the notebook before running.
+Open `Customer_Segmentation_with_Clustering (1).ipynb` from the repository root and run the cells in order. The notebook reads `Mall_Customers.csv` using a relative path.
 
----
+## Interpretation
 
-## 📌 Topics Covered
-
-- Unsupervised learning and clustering
-- K-Means, Agglomerative, and DBSCAN algorithms
-- Optimal cluster selection (Elbow method, Silhouette score)
-- Feature scaling strategies (StandardScaler vs. MinMaxScaler)
-- Dimensionality reduction with PCA
-- Customer profiling and semantic segment labeling
+Cluster labels describe similarity within this dataset; they are not pre-existing customer categories or proof of customer intent. Silhouette scores and visualizations are exploratory and should be evaluated against the intended business use before drawing conclusions.
